@@ -1,0 +1,5 @@
+name: Arq1
+
+include:
+  - file: arq1-common.yml
+    relativeToMasterFile: true
