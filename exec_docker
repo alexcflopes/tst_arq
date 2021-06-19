@@ -1,0 +1,13 @@
+docker run \
+    -e ARCHITECTURES_REPOSITORY_URI=https://github.com/mbouchenoire/lowfer.git \
+    -e ARCHITECTURES_REPOSITORY_BRANCH=master \
+    -e ARCHITECTURES_REPOSITORY_PATH=src/test/resources/architectures/demo \
+    -p 8080:8080 \
+    mbouchenoire/lowfer:latest
+
+docker run \
+    -e ARCHITECTURES_REPOSITORY_URI=https://github.com/alexcflopes/tst_arq.git \
+    -e ARCHITECTURES_REPOSITORY_BRANCH=master \
+    -e ARCHITECTURES_REPOSITORY_PATH=arqs \
+    -p 8080:8080 \
+    mbouchenoire/lowfer:latest
