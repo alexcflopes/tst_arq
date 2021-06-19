@@ -1,1 +1,66 @@
+name: Arq 1
 
+components:
+  - name: Frontend
+    type: frontend
+    dependencies:
+      - component: Order API
+      - component: Warehouse
+        type: pubkey
+      - component: Shipment
+  
+  - name: Order API
+    type: service
+    context: Order
+    dependencies:
+      - component: order_aggregate
+        type: queue.publish
+
+ 
+  
+  - name: order_checked
+    type: queue
+    context: Order
+ 
+  - name: order_confirmed
+    type: queue
+    context: Order
+
+  - name: order_placement
+    type: queue
+    context: Order   
+  
+  - name: order_aggregate
+    type: aggregate
+    context: Order
+    dependencies:
+
+    - component: order_placement
+      type: queue.publish
+    - component: order_confirmed
+      type: queue.publish
+    - component: order_checked
+      type: queue.publish
+
+    - component: banco_order
+
+
+  - name: Warehouse
+    type: service
+    dependencies:
+      - component: order_placement
+        type: queue.subscribe
+
+  - name: banco_order
+    type: database
+    context: Order
+    dependencies:
+      - component: stored_order
+      
+
+  - name: stored_order
+    type: stored-procedure
+    context: Order
+
+  - name: Shipment
+    type: service
