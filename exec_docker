@@ -23,3 +23,15 @@ docker run \
 /Users/alexcflopes/.ssh
 /Users/alexcflopes/.ssh/id_ed25519
 /Users/alexcflopes/.ssh/id_ed25519.pub
+
+ @Value("${git.host.default.ssl-verify:true}") boolean sslVerify,
+        @Value("${git.host.default.private-key.base64:}") String privateKeyBase64,
+        @Value("${git.host.default.private-key.path:}") String configuredPrivateKeyPath,
+        @Value("${git.host.default.private-key.password:}") String privateKeyPassword) throws IOException {
+
+        final GitSshConfig sshConfig = getPrivateKeyPath(configuredPrivateKeyPath, privateKeyBase64)
+            .map(privateKeyPath -> new GitSshConfig(privateKeyPath, privateKeyPassword))
+            .orElse(null);
+
+        this.defaultConfig = new GitHostConfig(sslVerify, sshConfig);
+    }
