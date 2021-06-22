@@ -13,12 +13,25 @@ docker run \
     mbouchenoire/lowfer:latest
     
 docker run \
-    -e GIT_HOST_DEFAULT_PRIVATE_KEY_PATH=/Users/alexcflopes/.ssh/id_ed25519.pub \
+    -e GIT_HOST_DEFAULT_PRIVATE_KEY_PATH=Users/alexcflopes/.ssh \
+    -e GIT_HOST_DEFAULT_PRIVATE_KEY_PASSWORD=xxxxx \
     -e ARCHITECTURES_REPOSITORY_URI=https://github.com/alexcflopes/tst_arq.git \
     -e ARCHITECTURES_REPOSITORY_BRANCH=main \
     -e ARCHITECTURES_REPOSITORY_PATH=arqs/demo \
     -p 8080:8080 \
     mbouchenoire/lowfer:latest
+
+
+docker run \
+    -e GIT_HOST_DEFAULT_PRIVATE_KEY_BASE64=xxxxx \
+    -e GIT_HOST_DEFAULT_PRIVATE_KEY_PASSWORD=xxx \
+    -e ARCHITECTURES_REPOSITORY_URI=https://github.com/alexcflopes/tst_arq.git \
+    -e ARCHITECTURES_REPOSITORY_BRANCH=main \
+    -e ARCHITECTURES_REPOSITORY_PATH=arqs/demo \
+    -p 8080:8080 \
+    mbouchenoire/lowfer:latest
+
+
 
 /Users/alexcflopes/.ssh
 /Users/alexcflopes/.ssh/id_ed25519
